@@ -1,7 +1,7 @@
 JRAKE
 =====
 
-This is a java implementation of RAKE algorithm described in the paper 
+This is a java implementation of com.github.askdrcatcher.jrake.RAKE algorithm described in the paper 
 [Automatic Keyword Extraction from Individual Documents](https://www.researchgate.net/publication/227988510_Automatic_Keyword_Extraction_from_Individual_Documents)
 by Rose et.al.
 
@@ -25,4 +25,4 @@ This is released under the [MIT License](http://www.opensource.org/licenses/MIT)
 Other Implementations
 =====================
 
-[Python] (https://github.com/aneesha/RAKE)
+[Python] (https://github.com/aneesha/com.github.askdrcatcher.jrake.RAKE)
