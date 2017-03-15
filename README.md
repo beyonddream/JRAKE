@@ -5,7 +5,7 @@ JRAKE
 
 [![Coverage Status](https://coveralls.io/repos/github/AskDrCatcher/JRAKE/badge.svg?branch=master)](https://coveralls.io/github/AskDrCatcher/JRAKE?branch=master)
 
-This is a java implementation of com.github.askdrcatcher.jrake.RAKE algorithm described in the paper 
+This is a java implementation of text mining algorithm described in the paper 
 [Automatic Keyword Extraction from Individual Documents](https://www.researchgate.net/publication/227988510_Automatic_Keyword_Extraction_from_Individual_Documents)
 by Rose et.al.
 
