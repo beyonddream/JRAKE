@@ -1,8 +1,10 @@
 package com.github.askdrcatcher.jrake;
 
-import com.github.askdrcatcher.jrake.file.FileUtil;
+import com.github.askdrcatcher.jrake.util.StringUtil;
+import com.github.askdrcatcher.jrake.util.file.FileUtil;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -13,10 +15,6 @@ import java.util.regex.Pattern;
  * License: MIT
  */
 public class Rake {
-
-    private boolean isNumber(final String str) {
-        return str.matches("[0-9.]");
-    }
 
     private StopList getStopList(String filePath) throws FileNotFoundException, IOException {
         final FileUtil fileUtil = new FileUtil(filePath);
@@ -37,7 +35,7 @@ public class Rake {
                 String wordLowerCase = word.trim().toLowerCase();
 
                 if (wordLowerCase.length() > 0 && wordLowerCase.length() > minimumWordReturnSize &&
-                        !isNumber(wordLowerCase)) {
+                        !StringUtil.isNumber(wordLowerCase)) {
 
                     separateWords.add(wordLowerCase);
                 }
