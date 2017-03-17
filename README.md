@@ -29,4 +29,4 @@ This is released under the [MIT License](http://www.opensource.org/licenses/MIT)
 Other Implementations
 =====================
 
-[Python] (https://github.com/aneesha/com.github.askdrcatcher.jrake.RAKE)
+[Python] (https://github.com/aneesha/RAKE)
