@@ -1,12 +1,13 @@
 package com.github.askdrcatcher.jrake;
 
+import com.github.askdrcatcher.jrake.file.FileUtil;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Java Port of com.github.askdrcatcher.jrake.RAKE (Rapid Automatic Keyword Extraction algorithm)
- * implementation in python at (https://github.com/aneesha/RAKE).
+ * Main App
  *
  * Author: askdrcatcher
  * License: MIT
@@ -14,39 +15,14 @@ import java.util.regex.Pattern;
 public class Rake {
 
     private boolean isNumber(final String str) {
-
         return str.matches("[0-9.]");
     }
 
-    private List<String> loadStopWords(String filePath) throws FileNotFoundException, IOException {
-
-        if (filePath == null || filePath.trim().length() == 0) {
-            filePath = "FoxStoplist.txt";
-        }
-
-        final List<String> stopWords = new ArrayList<String>();
-        final BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(filePath)));
-
-        try {
-
-
-
-            String line = br.readLine();
-
-            while (line != null) {
-
-                if (!line.startsWith("#")) { //add the line which is not a comment
-                    stopWords.add(line);
-                }
-
-                line = br.readLine();
-            }
-
-        } finally {
-            br.close();
-        }
-
-        return stopWords;
+    private StopList getStopList(String filePath) throws FileNotFoundException, IOException {
+        final FileUtil fileUtil = new FileUtil(filePath);
+        final StopList stopList = new StopList(fileUtil);
+        stopList.generateWords();
+        return stopList;
     }
 
     private List<String> separateWords(final String text, final int minimumWordReturnSize) {
@@ -85,10 +61,11 @@ public class Rake {
 
     public Pattern buildStopWordRegex(final String stopWordFilePath) throws IOException {
 
-        final List<String> stopWords = loadStopWords(stopWordFilePath);
+        final StopWords stopWords = getStopList(stopWordFilePath).getStopWords();
+        final List<String> allStopWords = stopWords.getAll();
         final StringBuilder stopWordPatternBuilder = new StringBuilder();
         int count = 0;
-        for(final String stopWord: stopWords) {
+        for(final String stopWord: allStopWords) {
             if (count++ != 0) {
                 stopWordPatternBuilder.append("|");
             }
@@ -228,4 +205,5 @@ public class Rake {
 
         return sortedKeyWordCandidates;
     }
+
 }
