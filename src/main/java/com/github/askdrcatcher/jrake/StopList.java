@@ -1,6 +1,6 @@
 package com.github.askdrcatcher.jrake;
 
-import com.github.askdrcatcher.jrake.file.FileUtil;
+import com.github.askdrcatcher.jrake.util.file.FileUtil;
 
 import java.io.IOException;
 

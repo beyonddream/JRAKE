@@ -1,4 +1,4 @@
-package com.github.askdrcatcher.jrake.file;
+package com.github.askdrcatcher.jrake.util.file;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
