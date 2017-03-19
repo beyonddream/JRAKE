@@ -1,7 +1,10 @@
 package com.github.askdrcatcher.jrake;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by askdrcatcher on 3/16/17.
@@ -20,8 +23,17 @@ public class StopWords {
         }
     }
 
-    public List<String> getAll() {
-        return words;
+    public Pattern getStopWordsPattern() {
+        final StringBuilder stopWordsPatternBuilder = new StringBuilder();
+        for(final String stopWord: words) {
+            stopWordsPatternBuilder.append("\\b");
+            stopWordsPatternBuilder.append(stopWord);
+            stopWordsPatternBuilder.append("\\b");
+            stopWordsPatternBuilder.append("|");
+        }
+        String stopWordsPatternString = stopWordsPatternBuilder.toString();
+        String stopWordPatternString  = StringUtils.chop(stopWordsPatternString); //remove last "|"
+        return Pattern.compile(stopWordPatternString, Pattern.CASE_INSENSITIVE);
     }
 }
 

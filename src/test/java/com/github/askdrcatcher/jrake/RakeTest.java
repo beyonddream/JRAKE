@@ -1,5 +1,6 @@
 package com.github.askdrcatcher.jrake;
 
+import com.github.askdrcatcher.jrake.util.FileUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,10 +51,13 @@ public class RakeTest {
     public void basicSetup() throws IOException {
         final Rake rakeInstance = new Rake();
 
-        final List<String> sentenceList = rakeInstance.splitSentences(input);
-        final String stopPath = "SmartStoplist.txt";
-        final Pattern stopWordPattern = rakeInstance.buildStopWordRegex(stopPath);
-        final List<String> phraseList = rakeInstance.generateCandidateKeywords(sentenceList, stopWordPattern);
+
+        Sentences sentences = new SentenceTokenizer().split(input);
+
+        StopList stopList = new StopList();
+        stopList.generateStopWords(new FileUtil("SmartStoplist.txt"));
+
+        final List<String> phraseList = new CandidateList().getPhraseList();
         final Map<String, Double> wordScore = rakeInstance.calculateWordScores(phraseList);
         final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(phraseList, wordScore);
 
