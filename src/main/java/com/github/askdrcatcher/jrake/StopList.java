@@ -1,6 +1,6 @@
 package com.github.askdrcatcher.jrake;
 
-import com.github.askdrcatcher.jrake.util.file.FileUtil;
+import com.github.askdrcatcher.jrake.util.FileUtil;
 
 import java.io.IOException;
 
@@ -9,22 +9,17 @@ import java.io.IOException;
  */
 class StopList {
 
-    private FileUtil fileUtil;
     private StopWords stopWords;
 
-    public StopList(FileUtil fileUtil) {
-        this.fileUtil = fileUtil;
+    public StopList() {
         this.stopWords = new StopWords();
     }
 
-    public void generateWords () throws IOException {
+    public StopList generateStopWords(FileUtil fileUtil) throws IOException {
         final FileUtil fileUtilIterator = fileUtil.iterator();
         while(fileUtilIterator.hasNext()) {
             stopWords.add(fileUtilIterator.next());
         }
-    }
-
-    public StopWords getStopWords() {
-        return stopWords;
+        return this;
     }
 }
