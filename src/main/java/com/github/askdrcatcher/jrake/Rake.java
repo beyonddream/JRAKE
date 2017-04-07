@@ -109,15 +109,13 @@ public class Rake {
 
         final Rake rakeInstance = new Rake();
 
+        final Sentences sentences = new SentenceTokenizer().split(text);
+        final StopList stopList = new StopList().generateStopWords(new FileUtil("SmartStoplist.txt"));
+        final CandidateList candidateList = new CandidateList().generateKeywords(sentences, stopList.getStopWords());
 
-        Sentences sentences = new SentenceTokenizer().split(text);
 
-        StopList stopList = new StopList();
-        stopList.generateStopWords(new FileUtil("SmartStoplist.txt"));
-
-        final List<String> phraseList = new CandidateList().getPhraseList();
-        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(phraseList);
-        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(phraseList, wordScore);
+        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(candidateList.getPhraseList());
+        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(candidateList.getPhraseList(), wordScore);
 
         System.out.println("keyWordCandidates = "+ keywordCandidates);
 

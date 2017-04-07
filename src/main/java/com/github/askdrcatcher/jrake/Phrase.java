@@ -16,8 +16,9 @@ public class Phrase implements Iterator<Word> {
     public Phrase addWords(String[] values) {
         if (values != null) {
             this.words = new Word[values.length];
+            int i = 0;
             for(String value : values) {
-                this.words[this.words.length] = new Word(value);
+                this.words[i++] = new Word(value);
             }
         }
         return this;
