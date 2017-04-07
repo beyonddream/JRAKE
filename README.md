@@ -1,7 +1,7 @@
 JRAKE
 ======
 
-[![Build Status](https://travis-ci.org/AskDrCatcher/JRAKE.svg?branch=master)](https://travis-ci.org/AskDrCatcher/JRAKE)
+[![Build Status](https://travis-ci.org/AskDrCatcher/JRAKE.svg?branch=refactor-1)](https://travis-ci.org/AskDrCatcher/JRAKE)
 
 [![Coverage Status](https://coveralls.io/repos/github/AskDrCatcher/JRAKE/badge.svg?branch=master)](https://coveralls.io/github/AskDrCatcher/JRAKE?branch=master)
 
