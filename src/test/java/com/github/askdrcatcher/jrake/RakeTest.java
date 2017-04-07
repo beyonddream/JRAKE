@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -49,17 +48,17 @@ public class RakeTest {
 
     @Test
     public void basicSetup() throws IOException {
+
         final Rake rakeInstance = new Rake();
 
+        final Sentences sentences = new SentenceTokenizer().split(input);
+        final StopList stopList = new StopList().generateStopWords(new FileUtil("SmartStoplist.txt"));
+        final CandidateList candidateList = new CandidateList().generateKeywords(sentences, stopList.getStopWords());
 
-        Sentences sentences = new SentenceTokenizer().split(input);
 
-        StopList stopList = new StopList();
-        stopList.generateStopWords(new FileUtil("SmartStoplist.txt"));
-
-        final List<String> phraseList = new CandidateList().getPhraseList();
-        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(phraseList);
-        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(phraseList, wordScore);
+        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(candidateList.getPhraseList());
+        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(candidateList.getPhraseList(),
+                                                            wordScore);
 
         assertEquals("Actual keyWordCandidates didn't match the expected", expectedKeyWordCandidates,
                 keywordCandidates.toString());

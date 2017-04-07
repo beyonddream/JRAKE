@@ -22,4 +22,8 @@ class StopList {
         }
         return this;
     }
+
+    public StopWords getStopWords() {
+        return stopWords;
+    }
 }

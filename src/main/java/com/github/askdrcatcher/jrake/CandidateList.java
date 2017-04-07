@@ -26,7 +26,7 @@ public class CandidateList {
     }
 
     private void addKeyWords(Phrase phrase) {
-        if (null != phrase && phrase.isEmpty()) {
+        if (null != phrase && !phrase.isEmpty()) {
             phrase = phrase.iterator();
             addKeyWord(phrase);
         }
