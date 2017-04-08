@@ -20,4 +20,7 @@ public class Sentence {
         return new Phrase().addWords(sentenceWithoutStopWords.split("\\|"));
     }
 
+    public String getValue() {
+        return value;
+    }
 }
