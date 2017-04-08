@@ -1,10 +1,10 @@
 package com.github.askdrcatcher.jrake;
 
-import com.github.askdrcatcher.jrake.file.FileUtil;
+import com.github.askdrcatcher.jrake.util.FileUtil;
+import com.github.askdrcatcher.jrake.util.StringUtil;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Main App
@@ -13,17 +13,6 @@ import java.util.regex.Pattern;
  * License: MIT
  */
 public class Rake {
-
-    private boolean isNumber(final String str) {
-        return str.matches("[0-9.]");
-    }
-
-    private StopList getStopList(String filePath) throws FileNotFoundException, IOException {
-        final FileUtil fileUtil = new FileUtil(filePath);
-        final StopList stopList = new StopList(fileUtil);
-        stopList.generateWords();
-        return stopList;
-    }
 
     private List<String> separateWords(final String text, final int minimumWordReturnSize) {
 
@@ -37,7 +26,7 @@ public class Rake {
                 String wordLowerCase = word.trim().toLowerCase();
 
                 if (wordLowerCase.length() > 0 && wordLowerCase.length() > minimumWordReturnSize &&
-                        !isNumber(wordLowerCase)) {
+                        !StringUtil.isNumber(wordLowerCase)) {
 
                     separateWords.add(wordLowerCase);
                 }
@@ -48,52 +37,6 @@ public class Rake {
     }
 
 
-    public List<String> splitSentences(final String text) {
-
-        final String[] sentences = text.split("[.!?,;:\\t\\\\-\\\\\"\\\\(\\\\)\\\\\\'\\u2019\\u2013]");
-
-        if (sentences != null) {
-            return new ArrayList<String>(Arrays.asList(sentences));
-        } else {
-            return new ArrayList<String>();
-        }
-    }
-
-    public Pattern buildStopWordRegex(final String stopWordFilePath) throws IOException {
-
-        final StopWords stopWords = getStopList(stopWordFilePath).getStopWords();
-        final List<String> allStopWords = stopWords.getAll();
-        final StringBuilder stopWordPatternBuilder = new StringBuilder();
-        int count = 0;
-        for(final String stopWord: allStopWords) {
-            if (count++ != 0) {
-                stopWordPatternBuilder.append("|");
-            }
-            stopWordPatternBuilder.append("\\b").append(stopWord).append("\\b");
-        }
-
-        return Pattern.compile(stopWordPatternBuilder.toString(), Pattern.CASE_INSENSITIVE);
-    }
-
-    public List<String> generateCandidateKeywords(List<String> sentenceList, Pattern stopWordPattern) {
-        final List<String> phraseList = new ArrayList<String>();
-
-        for (final String sentence : sentenceList) {
-
-            final String sentenceWithoutStopWord = stopWordPattern.matcher(sentence).replaceAll("|");
-            final String[] phrases = sentenceWithoutStopWord.split("\\|");
-
-            if (null != phrases && phrases.length > 0) {
-                for(final String phrase : phrases) {
-                    if (phrase.trim().toLowerCase().length() > 0) {
-                        phraseList.add(phrase.trim().toLowerCase());
-                    }
-                }
-            }
-        }
-
-        return phraseList;
-    }
 
     public Map<String,Double> calculateWordScores(List<String> phraseList) {
 
@@ -166,12 +109,13 @@ public class Rake {
 
         final Rake rakeInstance = new Rake();
 
-        final List<String> sentenceList = rakeInstance.splitSentences(text);
-        final String stopPath = "SmartStoplist.txt";
-        final Pattern stopWordPattern = rakeInstance.buildStopWordRegex(stopPath);
-        final List<String> phraseList = rakeInstance.generateCandidateKeywords(sentenceList, stopWordPattern);
-        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(phraseList);
-        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(phraseList, wordScore);
+        final Sentences sentences = new SentenceTokenizer().split(text);
+        final StopList stopList = new StopList().generateStopWords(new FileUtil("SmartStoplist.txt"));
+        final CandidateList candidateList = new CandidateList().generateKeywords(sentences, stopList.getStopWords());
+
+
+        final Map<String, Double> wordScore = rakeInstance.calculateWordScores(candidateList.getPhraseList());
+        final Map<String, Double> keywordCandidates = rakeInstance.generateCandidateKeywordScores(candidateList.getPhraseList(), wordScore);
 
         System.out.println("keyWordCandidates = "+ keywordCandidates);
 
