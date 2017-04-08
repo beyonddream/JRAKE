@@ -3,7 +3,7 @@ JRAKE
 
 [![Build Status](https://travis-ci.org/AskDrCatcher/JRAKE.svg?branch=refactor-2)](https://travis-ci.org/AskDrCatcher/JRAKE)
 
-[![Coverage Status](https://coveralls.io/repos/github/AskDrCatcher/JRAKE/badge.svg?branch=master)](https://coveralls.io/github/AskDrCatcher/JRAKE?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/AskDrCatcher/JRAKE/badge.svg?branch=refactor-2)](https://coveralls.io/github/AskDrCatcher/JRAKE?branch=master)
 
 This is a java implementation of text mining algorithm described in the paper 
 [Automatic Keyword Extraction from Individual Documents](https://www.researchgate.net/publication/227988510_Automatic_Keyword_Extraction_from_Individual_Documents)
