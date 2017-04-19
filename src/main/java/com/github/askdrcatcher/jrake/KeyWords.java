@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class KeyWords {
 
-    private List<String> value;
+    List<String> value;
 
     public KeyWords () {
         this.value = new ArrayList<String>();
@@ -18,7 +18,4 @@ public class KeyWords {
         value.add(word);
     }
 
-    public List<String> getKeyWords() {
-        return value;
-    }
 }

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class Sentence {
 
-    private String value;
+    String value;
 
     public Sentence (String value) {
         this.value = value;
@@ -20,7 +20,4 @@ public class Sentence {
         return new Phrase().addWords(sentenceWithoutStopWords.split("\\|"));
     }
 
-    public String getValue() {
-        return value;
-    }
 }

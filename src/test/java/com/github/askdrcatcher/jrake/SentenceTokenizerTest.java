@@ -36,7 +36,7 @@ public class SentenceTokenizerTest {
 
             Sentence sentence = itr.next();
 
-            assertThat(sentence.getValue(),
+            assertThat(sentence.value,
                     anyOf(equalTo("Compatibility of systems of linear constraints over the set of natural numbers"),
                             equalTo(" Criteria of compatibility of a system of linear Diophantine equations"),
                             equalTo(" strict inequations"),

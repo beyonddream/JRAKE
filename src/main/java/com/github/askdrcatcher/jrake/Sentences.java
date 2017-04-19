@@ -7,7 +7,7 @@ import java.util.Iterator;
  */
 public class Sentences implements Iterator<Sentence> {
 
-    private Sentence[] sentences;
+    Sentence[] sentences;
     private int currentPos;
 
     public Sentences () {

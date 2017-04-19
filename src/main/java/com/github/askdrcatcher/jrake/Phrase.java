@@ -7,7 +7,7 @@ import java.util.Iterator;
  */
 public class Phrase implements Iterator<Word> {
 
-    private Word[] words;
+    Word[] words;
     private int currentPos;;
 
     public Phrase() {

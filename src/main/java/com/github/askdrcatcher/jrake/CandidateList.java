@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class CandidateList {
 
-    private KeyWords keyWords;
+    KeyWords keyWords;
 
     public CandidateList () {
         this.keyWords = new KeyWords();
@@ -46,6 +46,6 @@ public class CandidateList {
     }
 
     public List<String> getPhraseList() {
-        return keyWords.getKeyWords();
+        return keyWords.value;
     }
 }

@@ -5,7 +5,7 @@ package com.github.askdrcatcher.jrake;
  */
 public class SentenceTokenizer {
 
-    private String grammar;
+    String grammar;
 
     public SentenceTokenizer () {
         this.grammar =  "[.!?,;:\\t\\\\-\\\\\"\\\\(\\\\)\\\\\\'\\u2019\\u2013]";
