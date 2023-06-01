@@ -1,8 +1,6 @@
 JRAKE
 ======
 
-[![Build Status](https://app.travis-ci.com/beyonddream/JRAKE.svg?branch=main)](https://travis-ci.org/AskDrCatcher/JRAKE)
-
 [![Coverage Status](https://coveralls.io/repos/github/AskDrCatcher/JRAKE/badge.svg?branch=master)](https://coveralls.io/github/AskDrCatcher/JRAKE?branch=master)
 
 This is a java implementation of text mining algorithm described in the paper 
